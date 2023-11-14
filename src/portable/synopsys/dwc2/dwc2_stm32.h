@@ -83,16 +83,37 @@ extern "C" {
   #define EP_FIFO_SIZE_FS 1280
 
 #elif CFG_TUSB_MCU == OPT_MCU_STM32U5
+//   #include "stm32u5xx.h"
+//   // U59x/5Ax/5Fx/5Gx are highspeed with built-in HS PHY
+//   #ifdef USB_OTG_FS
+//     #define USB_OTG_FS_PERIPH_BASE    USB_OTG_FS_BASE
+//     #define EP_MAX_FS                 6
+//     #define EP_FIFO_SIZE_FS           1280
+//   #else
+//     #define USB_OTG_HS_PERIPH_BASE    USB_OTG_HS_BASE
+//     #define EP_MAX_HS                 9
+//     #define EP_FIFO_SIZE_HS           4096
+//   #endif
+// #else
+//   #error "Unsupported MCUs"
+// #endif
   #include "stm32u5xx.h"
-  // U59x/5Ax/5Fx/5Gx are highspeed with built-in HS PHY
-  #ifdef USB_OTG_FS
-    #define USB_OTG_FS_PERIPH_BASE    USB_OTG_FS_BASE
-    #define EP_MAX_FS                 6
-    #define EP_FIFO_SIZE_FS           1280
+  #define EP_MAX_FS              6
+  #define EP_FIFO_SIZE_FS        1280
+
+  #if defined (STM32U535xx) || defined (STM32U545xx) || defined (STM32U575xx) || defined (STM32U585xx)
+    #define USB_OTG_FS_PERIPH_BASE USB_OTG_FS_BASE
+
+  #elif defined (STM32U595xx) || defined (STM32U5A5xx) || defined (STM32U599xx) || defined (STM32U5A9xx)
+    /* USB_OTG_FS_PERIPH_BASE and OTG_FS_IRQn not defined */
+    #define USB_OTG_FS_PERIPH_BASE USB_OTG_HS_PERIPH_BASE
+    #define OTG_FS_IRQn            OTG_HS_IRQn
+
+    #define USB_OTG_HS_PERIPH_BASE USB_OTG_HS_BASE
+    #define EP_MAX_HS              9
+    #define EP_FIFO_SIZE_HS        4096
   #else
-    #define USB_OTG_HS_PERIPH_BASE    USB_OTG_HS_BASE
-    #define EP_MAX_HS                 9
-    #define EP_FIFO_SIZE_HS           4096
+    #error "Unsupported STM32U5 mcu"
   #endif
 #else
   #error "Unsupported MCUs"

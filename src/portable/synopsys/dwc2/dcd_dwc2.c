@@ -418,10 +418,20 @@ void dcd_init(uint8_t rhport) {
   // max number of endpoints & total_fifo_size are:
   // hw_cfg2->num_dev_ep, hw_cfg2->total_fifo_size
 
-  if (phy_hs_supported(dwc2)) {
-    phy_hs_init(dwc2); // Highspeed
-  } else {
-    phy_fs_init(dwc2); // core does not support highspeed or hs phy is not present
+  // if (phy_hs_supported(dwc2)) {
+  //   phy_hs_init(dwc2); // Highspeed
+  // } else {
+  //   phy_fs_init(dwc2); // core does not support highspeed or hs phy is not present
+  // }
+
+    // rhport is used to choose between FS-phy and HS-phy.
+  if (rhport == 0) {
+    phy_fs_init(dwc2);
+  }
+  else if (rhport == 1) {
+    if (phy_hs_supported(dwc2)) {
+	    phy_hs_init(dwc2);
+    }
   }
 
   // Restart PHY clock
