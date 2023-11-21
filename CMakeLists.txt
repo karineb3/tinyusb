@@ -13,6 +13,8 @@ if(TINY_USB_CONFIG_PATH)
                 hw/bsp/board.c
                 hw/bsp/stm32u5
                 ${TINY_USB_CONFIG_PATH}/usb_descriptors.c
+                ${TINY_USB_CONFIG_PATH}/cdc_app.c
+                ${TINY_USB_CONFIG_PATH}/uac2_app.c
                 hw/bsp/stm32u5/family.c
             PUBLIC
                 src/portable/synopsys/dwc2/dwc2_stm32.h

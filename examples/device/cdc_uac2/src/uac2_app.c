@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "bsp/board_api.h"
+#include "board_api.h"
 #include "tusb.h"
 #include "usb_descriptors.h"
 #include "common.h"
@@ -37,8 +37,8 @@
 //--------------------------------------------------------------------+
 
 // List of supported sample rates
-const uint32_t sample_rates[] = {48000};
-uint32_t current_sample_rate  = 48000;
+const uint32_t sample_rates[] = {44100, 48000};
+uint32_t current_sample_rate  = 44100;
 
 #define N_SAMPLE_RATES  TU_ARRAY_SIZE(sample_rates)
 
