@@ -82,24 +82,24 @@ static void echo_serial_port(uint8_t itf, uint8_t buf[], uint32_t count)
 //--------------------------------------------------------------------+
 static void cdc_task(void)
 {
-  uint8_t itf;
+    uint8_t itf;
 
-  for (itf = 0; itf < CFG_TUD_CDC; itf++)
-  {
-    // connected() check for DTR bit
-    // Most but not all terminal client set this when making connection
-    // if ( tud_cdc_n_connected(itf) )
+    for (itf = 0; itf < CFG_TUD_CDC; itf++)
     {
-      if ( tud_cdc_n_available(itf) )
+      // connected() check for DTR bit
+      // Most but not all terminal client set this when making connection
+      // if ( tud_cdc_n_connected(itf) )
       {
-        uint8_t buf[64];
+        if ( tud_cdc_n_available(itf) )
+        {
+          uint8_t buf[64];
 
-        uint32_t count = tud_cdc_n_read(itf, buf, sizeof(buf));
+          uint32_t count = tud_cdc_n_read(itf, buf, sizeof(buf));
 
-        // echo back to both serial ports
-        echo_serial_port(0, buf, count);
-        echo_serial_port(1, buf, count);
+          // echo back to both serial ports
+          echo_serial_port(0, buf, count);
+          echo_serial_port(1, buf, count);
+        }
       }
     }
-  }
 }
