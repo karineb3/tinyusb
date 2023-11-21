@@ -6,6 +6,7 @@ set(TINY_USB_CONFIG_PATH examples/device/cdc_uac2/src CACHE INTERNAL "Path to ti
         PRIVATE
             src/tusb.c
             src/class/cdc/cdc_device.c
+            src/class/audio/audio_device.c
             src/common/tusb_fifo.c
             src/device/usbd_control.c
             src/device/usbd.c
@@ -13,6 +14,7 @@ set(TINY_USB_CONFIG_PATH examples/device/cdc_uac2/src CACHE INTERNAL "Path to ti
             hw/bsp/board.c
             hw/bsp/stm32u5
             ${TINY_USB_CONFIG_PATH}/usb_descriptors.c
+            hw/bsp/stm32u5/family.c
         PUBLIC
             src/portable/synopsys/dwc2/dwc2_stm32.h
             hw/bsp/board_api.h
@@ -28,7 +30,7 @@ set(TINY_USB_CONFIG_PATH examples/device/cdc_uac2/src CACHE INTERNAL "Path to ti
             src/device
             src/portable/synopsys/dwc2
             ${TINY_USB_CONFIG_PATH}
+            hw/bsp/stm32u5/boards/stm32u5a5nucleo
     )
 
-    target_link_libraries(tinyusb PUBLIC hardware)
-
+target_link_libraries(tinyusb PUBLIC hardware)

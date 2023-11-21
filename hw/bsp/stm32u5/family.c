@@ -37,7 +37,7 @@
 #pragma GCC diagnostic pop
 #endif
 
-#include "bsp/board_api.h"
+#include "board_api.h"
 
 TU_ATTR_UNUSED static void Error_Handler(void) {
 }
@@ -51,9 +51,9 @@ void OTG_FS_IRQHandler(void) {
   tud_int_handler(0);
 }
 
-void OTG_HS_IRQHandler(void) {
-  tud_int_handler(0);
-}
+// void OTG_HS_IRQHandler(void) {
+//   tud_int_handler(0);
+// }
 
 //--------------------------------------------------------------------+
 // MACRO TYPEDEF CONSTANT ENUM
@@ -237,10 +237,10 @@ int board_uart_write(void const *buf, int len) {
 #if CFG_TUSB_OS == OPT_OS_NONE
 volatile uint32_t system_ticks = 0;
 
-void SysTick_Handler(void) {
-  HAL_IncTick();
-  system_ticks++;
-}
+// void SysTick_Handler(void) {
+//   HAL_IncTick();
+//   system_ticks++;
+// }
 
 uint32_t board_millis(void) {
   return system_ticks;
@@ -248,11 +248,11 @@ uint32_t board_millis(void) {
 
 #endif
 
-void HardFault_Handler(void) {
-  asm("bkpt");
-}
+// void HardFault_Handler(void) {
+//   asm("bkpt");
+// }
 
 // Required by __libc_init_array in startup code if we are compiling using
 // -nostdlib/-nostartfiles.
-void _init(void) {
-}
+// void _init(void) {
+// }
