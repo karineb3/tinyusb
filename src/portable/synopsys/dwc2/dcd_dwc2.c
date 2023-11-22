@@ -424,11 +424,15 @@ void dcd_init(uint8_t rhport) {
   //   phy_fs_init(dwc2); // core does not support highspeed or hs phy is not present
   // }
 
-    // rhport is used to choose between FS-phy and HS-phy.
-  if (rhport == 0) {
+  /* C'est pas très bon ça non plus puisque, si on place a default, on ne sait pas si on est en HS ou en FS.
+   * Par contre ça évite le cas ou en FS & RHPORT = 1 on init pour le HS.
+   *
+   * TODO : Trouver la variable qui nous informe sur la vitesse désirée & calculée
+   */
+  if (CFG_TUD_MAX_SPEED == OPT_MODE_FULL_SPEED) {
     phy_fs_init(dwc2);
   }
-  else if (rhport == 1) {
+  else if (CFG_TUD_MAX_SPEED == OPT_MODE_HIGH_SPEED) {
     if (phy_hs_supported(dwc2)) {
 	    phy_hs_init(dwc2);
     }
