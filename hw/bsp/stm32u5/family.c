@@ -47,9 +47,9 @@ TU_ATTR_UNUSED static void Error_Handler(void) {
 //--------------------------------------------------------------------+
 // Forward USB interrupt events to TinyUSB IRQ Handler
 //--------------------------------------------------------------------+
-void OTG_FS_IRQHandler(void) {
-  tud_int_handler(0);
-}
+// void OTG_FS_IRQHandler(void) {
+//   tud_int_handler(0);
+// }
 
 // void OTG_HS_IRQHandler(void) {
 //   tud_int_handler(0);
