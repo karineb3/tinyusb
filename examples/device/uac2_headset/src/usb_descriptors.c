@@ -24,7 +24,7 @@
  *
  */
 
-#include "bsp/board_api.h"
+#include "board_api.h"
 #include "tusb.h"
 #include "usb_descriptors.h"
 
